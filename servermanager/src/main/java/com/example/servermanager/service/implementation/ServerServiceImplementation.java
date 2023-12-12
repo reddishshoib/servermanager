@@ -4,15 +4,19 @@ import com.example.servermanager.enumeration.Status;
 import com.example.servermanager.model.Server;
 import com.example.servermanager.repo.ServerRepository;
 import com.example.servermanager.service.ServerService;
+import jakarta.servlet.Servlet;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Collection;
+import java.util.Random;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -62,6 +66,7 @@ public class ServerServiceImplementation implements ServerService {
         return Boolean.TRUE;
     }
     private String setServerImageUrl() {
-        return  null;
+        String[] imageName= {"server1.png","server2.png","server3.png","server4.png"};
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path("./server/image/"+imageName[new Random().nextInt(4)]).toUriString();
     }
 }
