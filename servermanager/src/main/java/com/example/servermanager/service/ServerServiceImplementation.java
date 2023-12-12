@@ -1,10 +1,8 @@
-package com.example.servermanager.service.implementation;
+package com.example.servermanager.service;
 
 import com.example.servermanager.enumeration.Status;
 import com.example.servermanager.model.Server;
 import com.example.servermanager.repo.ServerRepository;
-import com.example.servermanager.service.ServerService;
-import jakarta.servlet.Servlet;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +24,7 @@ public class ServerServiceImplementation implements ServerService {
 
     @Override
     public Server create(Server server) {
-        log.info("Saving new server {}",server.getName());
+        log.info("Saving new server: {} ",server.getName());
         server.setImgUrl(setServerImageUrl());
         return serverRepository.save(server);
     }

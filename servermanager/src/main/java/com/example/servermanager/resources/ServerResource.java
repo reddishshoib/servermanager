@@ -1,20 +1,17 @@
 package com.example.servermanager.resources;
 
-import com.example.servermanager.enumeration.Status;
 import com.example.servermanager.model.Response;
 import com.example.servermanager.model.Server;
-import com.example.servermanager.service.implementation.ServerServiceImplementation;
+import com.example.servermanager.service.ServerServiceImplementation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Map;
 
 import static com.example.servermanager.enumeration.Status.SERVER_UP;
 import static java.time.LocalDateTime.now;
@@ -54,12 +51,12 @@ public class ServerResource {
         );
     }
     @PostMapping("/save")
-    public ResponseEntity<Response> saveServer(@RequestBody @Valid Server server) throws IOException {
+    public ResponseEntity<Response> saveServer(@RequestBody @Valid Server server) {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
                         .data(of("server", serverServiceImplementation.create(server)))
-                        .message("Server Created")
+                        .message("Server created")
                         .status(CREATED)
                         .statusCode(CREATED.value())
                         .build()
